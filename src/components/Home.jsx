@@ -151,7 +151,7 @@ const Home = () => {
           <div className="text-blue-500">
             <span className="text-blue-500 text-2xl">
               Your Username:{" "}
-              <span className="text-red-500">{mainUser.username}</span>
+              <span className="text-red-500">{mainUser?.username}</span>
             </span>
           </div>
         </h2>
