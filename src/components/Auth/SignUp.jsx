@@ -17,7 +17,8 @@ const SignUp = () => {
         console.log(formData);
         const user = await axios.post(
           `https://tutedude-assignment-backend.onrender.com/api/auth/signup`,
-          formData
+          formData,
+          { withCredentials: true }
         );
         if (user.status === 201) {
           navigate("/");

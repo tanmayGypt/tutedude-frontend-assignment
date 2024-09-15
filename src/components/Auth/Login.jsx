@@ -14,7 +14,8 @@ const Login = () => {
     try {
       const user = await axios.post(
         `https://tutedude-assignment-backend.onrender.com/api/auth/login`,
-        formData
+        formData,
+        { withCredentials: true }
       );
       console.log(user.data);
       if (user.status === 200) {
