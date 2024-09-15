@@ -30,6 +30,7 @@ const Home = () => {
   const navigate = useNavigate();
   console.log(mainUser);
 
+  // Filter users based on search input
   useEffect(() => {
     const searchUsers = () => {
       if (!searchItem) {
@@ -43,7 +44,7 @@ const Home = () => {
       }
     };
     searchUsers();
-  }, [searchItem]);
+  }, [searchItem, users]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -73,8 +74,6 @@ const Home = () => {
         setFriends(Array.from(friendIds));
       }
     };
-
-    fetchData();
     const getMutualFriends = () => {
       const mutualFriends = [];
 
@@ -93,7 +92,8 @@ const Home = () => {
     };
 
     getMutualFriends();
-  }, [activeTab, friendList, friends, users, mainUser]);
+    fetchData();
+  }, [friendList, users, friends]);
 
   async function handleAddFriend(friendId) {
     try {
@@ -249,15 +249,12 @@ const Home = () => {
 
         {activeTab === "search" && (
           <div>
-            <h3 className="text-xl font-semibold text-gray-600 mb-4">
-              Search for Users
-            </h3>
             <input
               type="text"
-              className="w-full border p-2 rounded mb-4"
-              placeholder="Search by username..."
+              placeholder="Search friends..."
               value={searchItem}
               onChange={(e) => setSearchTerm(e.target.value)}
+              className="border border-blue-500 rounded px-4 py-2 w-full mb-4"
             />
             {filteredUsers.length > 0 ? (
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -313,6 +310,7 @@ const Home = () => {
             )}
           </div>
         )}
+
         <div className="flex justify-center mt-8">
           <button
             className="bg-red-500 text-white px-6 py-3 w-full rounded hover:bg-red-400 transition"
