@@ -150,7 +150,8 @@ const Home = () => {
           Friend Management
           <div className="text-blue-500">
             <span className="text-blue-500 text-2xl">
-              Your Username: <span className="text-red-500">{ProfileUser}</span>
+              Your Username:{" "}
+              <span className="text-red-500">{mainUser.username}</span>
             </span>
           </div>
         </h2>
