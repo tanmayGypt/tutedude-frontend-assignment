@@ -10,7 +10,7 @@ const Login = () => {
     e.preventDefault();
     try {
       const user = await axios.post(
-        "http://localhost:5000/api/auth/login",
+        `${process.env.BASE_URL}/api/auth/login`,
         formData
       );
       console.log(user.data);

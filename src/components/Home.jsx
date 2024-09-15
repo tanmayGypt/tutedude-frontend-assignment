@@ -8,7 +8,7 @@ import toast, { Toaster } from "react-hot-toast";
 const ProfileUser = Cookies.get("user");
 // const hashmap = new Map();
 async function fetchUser(userId) {
-  const res = await axios.get("http://localhost:5000/api/friends/", {
+  const res = await axios.get(`${process.env.BASE_URL}/api/friends/`, {
     userId: ProfileUser,
   });
   return res.data;
@@ -97,7 +97,7 @@ const Home = () => {
   async function handleAddFriend(friendId) {
     try {
       const res = await axios.post(
-        "http://localhost:5000/api/friends/add-friend",
+        `${process.env.BASE_URL}/api/friends/add-friend`,
         { friendId, userId: ProfileUser }
       );
       console.log(res);
@@ -118,7 +118,7 @@ const Home = () => {
   async function handleFriendRequest(friendId) {
     try {
       const res = await axios.post(
-        "http://localhost:5000/api/friends/accept-friend",
+        `${process.env.BASE_URL}/api/friends/accept-friend`,
         { friendId, userId: ProfileUser }
       );
       console.log(res);
@@ -135,7 +135,7 @@ const Home = () => {
   async function handleUnfriend(friendId) {
     try {
       const res = await axios.post(
-        "http://localhost:5000/api/friends/unfriend",
+        `${process.env.BASE_URL}/api/friends/unfriend`,
         { friendId, userId: ProfileUser }
       );
       console.log(res);
