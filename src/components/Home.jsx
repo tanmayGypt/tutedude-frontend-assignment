@@ -44,7 +44,7 @@ const Home = () => {
       }
     };
     searchUsers();
-  }, [searchItem, users]);
+  }, [searchItem, users, friendList, mainUser, friendRequests]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -74,6 +74,7 @@ const Home = () => {
         setFriends(Array.from(friendIds));
       }
     };
+    fetchData();
     const getMutualFriends = () => {
       const mutualFriends = [];
 
@@ -90,9 +91,9 @@ const Home = () => {
 
       setFriendOfFriends(mutualFriends);
     };
-    fetchData();
+
     getMutualFriends();
-  }, [activeTab, friendList, friends, users]);
+  }, [activeTab, friendList, friends, users, mainUser]);
 
   async function handleAddFriend(friendId) {
     try {
