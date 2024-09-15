@@ -2,24 +2,25 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import Cookies from "js-cookie";
+
 const Login = () => {
   const [formData, setFormData] = useState({ username: "", password: "" });
+  const [loading, setLoading] = useState(false); // New loading state
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true); // Set loading to true before starting the request
     try {
       const user = await axios.post(
-        `${process.env.BASE_URL}/api/auth/login`,
+        `${process.env.REACT_APP_BASE_URL}/api/auth/login`,
         formData
       );
       console.log(user.data);
-      // console.log(user);
       if (user.status === 200) {
         console.log(user.data);
         Cookies.set("profile", user.data.token);
         Cookies.set("user", user.data.result.username);
-
         navigate("/");
       } else {
         console.log("User Not Found");
@@ -27,11 +28,18 @@ const Login = () => {
     } catch (err) {
       console.log(err);
       return err;
+    } finally {
+      setLoading(false); // Set loading to false after the request completes
     }
   };
 
   return (
-    <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8 my-20 ">
+    <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8 my-20">
+      {loading && (
+        <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50">
+          <div className="loader"></div> {/* Add your loader here */}
+        </div>
+      )}
       <div className="sm:mx-auto sm:w-full sm:max-w-sm">
         <img
           className="mx-auto h-24 w-auto"
@@ -48,7 +56,7 @@ const Login = () => {
           <div>
             <label
               htmlFor="email"
-              className="block text-sm font-medium leading-6  text-gray-900"
+              className="block text-sm font-medium leading-6 text-gray-900"
             >
               Username
             </label>
@@ -95,7 +103,6 @@ const Login = () => {
           <div>
             <button
               type="submit"
-              onClick={(e) => handleSubmit(e)}
               className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
             >
               Sign in
