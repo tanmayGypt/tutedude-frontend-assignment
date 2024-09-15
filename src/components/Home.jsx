@@ -94,7 +94,7 @@ const Home = () => {
 
     fetchData();
     GetMutualFriends();
-  });
+  }, [users, FriendOfFriends, activeTab, friendRequests, GetMutualFriends]);
 
   // Add Friend Functionality
   async function handleAddFriend(friendId) {
