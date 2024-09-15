@@ -315,7 +315,7 @@ const Home = () => {
         )}
         <div className="flex justify-center mt-8">
           <button
-            className="bg-red-500 text-white px-6 py-3 rounded hover:bg-red-400 transition"
+            className="bg-red-500 text-white px-6 py-3 w-full rounded hover:bg-red-400 transition"
             onClick={handleLogout}
           >
             Logout
