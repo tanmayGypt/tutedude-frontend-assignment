@@ -43,7 +43,7 @@ const Home = () => {
       }
     };
     searchUsers();
-  });
+  }, [searchItem]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -93,7 +93,7 @@ const Home = () => {
     };
 
     getMutualFriends();
-  });
+  }, [activeTab, friendList, friends, users, mainUser]);
 
   async function handleAddFriend(friendId) {
     try {
