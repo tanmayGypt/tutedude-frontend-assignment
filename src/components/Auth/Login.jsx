@@ -13,7 +13,7 @@ const Login = () => {
     setLoading(true); // Set loading to true before starting the request
     try {
       const user = await axios.post(
-        `${process.env.BASE_URL}/api/auth/login`,
+        `https://tutedude-assignment-backend.onrender.com/api/auth/login`,
         formData
       );
       console.log(user.data);

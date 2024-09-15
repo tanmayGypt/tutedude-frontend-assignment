@@ -8,9 +8,12 @@ import toast, { Toaster } from "react-hot-toast";
 const ProfileUser = Cookies.get("user");
 // const hashmap = new Map();
 async function fetchUser(userId) {
-  const res = await axios.get(`${process.env.BASE_URL}/api/friends/`, {
-    userId: ProfileUser,
-  });
+  const res = await axios.get(
+    `https://tutedude-assignment-backend.onrender.com/api/friends/`,
+    {
+      userId: ProfileUser,
+    }
+  );
   return res.data;
 }
 
@@ -97,7 +100,7 @@ const Home = () => {
   async function handleAddFriend(friendId) {
     try {
       const res = await axios.post(
-        `${process.env.BASE_URL}/api/friends/add-friend`,
+        `https://tutedude-assignment-backend.onrender.com/api/friends/add-friend`,
         { friendId, userId: ProfileUser },
         { withCredentials: true }
       );
@@ -119,7 +122,7 @@ const Home = () => {
   async function handleFriendRequest(friendId) {
     try {
       const res = await axios.post(
-        `${process.env.BASE_URL}/api/friends/accept-friend`,
+        `https://tutedude-assignment-backend.onrender.com/api/friends/accept-friend`,
         { friendId, userId: ProfileUser },
         { withCredentials: true }
       );
@@ -137,7 +140,7 @@ const Home = () => {
   async function handleUnfriend(friendId) {
     try {
       const res = await axios.post(
-        `${process.env.BASE_URL}/api/friends/unfriend`,
+        `https://tutedude-assignment-backend.onrender.com/api/friends/unfriend`,
         { friendId, userId: ProfileUser },
         { withCredentials: true }
       );
