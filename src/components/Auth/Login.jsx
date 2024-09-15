@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-// import Cookies from "js-cookie";
+import Cookies from "js-cookie";
 
 const Login = () => {
   const [formData, setFormData] = useState({ username: "", password: "" });
@@ -18,7 +18,10 @@ const Login = () => {
         { withCredentials: true }
       );
       console.log(user.data);
+
       if (user.status === 200) {
+        Cookies.set("profile", user.data.token);
+        Cookies.set("user", user.data.result.username);
         navigate("/");
       } else {
         console.log("User Not Found");
