@@ -30,22 +30,6 @@ const Home = () => {
   const navigate = useNavigate();
   console.log(mainUser);
   // Fetch mutual friends logic
-  const getMutualFriends = () => {
-    const mutualFriends = [];
-
-    friendList.forEach((peer) => {
-      const peerFriendsSet = new Set(peer.friends);
-      const filteredFriends = users.filter(
-        (user) =>
-          peerFriendsSet.has(user._id) &&
-          user._id !== ProfileUser &&
-          !friends.includes(user._id)
-      );
-      mutualFriends.push(...filteredFriends);
-    });
-
-    setFriendOfFriends(mutualFriends);
-  };
 
   useEffect(() => {
     const searchUsers = () => {
@@ -90,10 +74,25 @@ const Home = () => {
         setFriends(Array.from(friendIds));
       }
     };
+    const getMutualFriends = () => {
+      const mutualFriends = [];
 
+      friendList.forEach((peer) => {
+        const peerFriendsSet = new Set(peer.friends);
+        const filteredFriends = users.filter(
+          (user) =>
+            peerFriendsSet.has(user._id) &&
+            user._id !== ProfileUser &&
+            !friends.includes(user._id)
+        );
+        mutualFriends.push(...filteredFriends);
+      });
+
+      setFriendOfFriends(mutualFriends);
+    };
     fetchData();
     getMutualFriends();
-  }, [activeTab]);
+  }, [activeTab, friendList, friends, users]);
 
   async function handleAddFriend(friendId) {
     try {
