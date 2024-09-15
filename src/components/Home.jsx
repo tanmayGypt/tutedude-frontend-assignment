@@ -3,10 +3,10 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Cookies from "js-cookie";
 import toast, { Toaster } from "react-hot-toast";
-import { fireEvent } from "@testing-library/react";
+// import { fireEvent } from "@testing-library/react";
 
 const ProfileUser = Cookies.get("user");
-const hashmap = new Map();
+// const hashmap = new Map();
 async function fetchUser(userId) {
   const res = await axios.get("http://localhost:5000/api/friends/", {
     userId: ProfileUser,
@@ -27,10 +27,11 @@ const Home = () => {
   const navigate = useNavigate();
   function GetMutualFriends() {
     let ans = [];
+    console.log(mainUser);
     let n = friendList.length;
     for (let i = 0; i < n; i++) {
       let peer = friendList[i];
-      let m = peer.friends.length;
+
       const temp = new Set(peer.friends.map((friend) => friend));
       const filteredFriends = users.filter(
         (user) =>
@@ -90,7 +91,7 @@ const Home = () => {
 
     fetchData();
     GetMutualFriends();
-  }, [users]);
+  });
 
   // Add Friend Functionality
   async function handleAddFriend(friendId) {
@@ -99,6 +100,8 @@ const Home = () => {
         "http://localhost:5000/api/friends/add-friend",
         { friendId, userId: ProfileUser }
       );
+      console.log(res);
+
       toast.success("Friend Request sent successfully");
       // console.log(res);
     } catch (err) {
@@ -118,6 +121,7 @@ const Home = () => {
         "http://localhost:5000/api/friends/accept-friend",
         { friendId, userId: ProfileUser }
       );
+      console.log(res);
       toast.success("Friend Request Accepted ");
       // console.log(res);
     } catch (err) {
@@ -134,6 +138,7 @@ const Home = () => {
         "http://localhost:5000/api/friends/unfriend",
         { friendId, userId: ProfileUser }
       );
+      console.log(res);
       toast.success("Succesfully Unfriended");
       // console.log(res.data);
     } catch (err) {
