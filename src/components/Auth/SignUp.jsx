@@ -20,8 +20,6 @@ const SignUp = () => {
           formData
         );
         if (user.status === 201) {
-          Cookies.set("profile", user.data.token);
-          Cookies.set("user", user.data.result.username);
           navigate("/");
         } else {
           console.log("Registration failed");

@@ -18,9 +18,6 @@ const Login = () => {
       );
       console.log(user.data);
       if (user.status === 200) {
-        console.log(user.data);
-        Cookies.set("profile", user.data.token);
-        Cookies.set("user", user.data.result.username);
         navigate("/");
       } else {
         console.log("User Not Found");
