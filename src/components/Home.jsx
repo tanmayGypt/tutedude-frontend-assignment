@@ -98,7 +98,8 @@ const Home = () => {
     try {
       const res = await axios.post(
         `${process.env.BASE_URL}/api/friends/add-friend`,
-        { friendId, userId: ProfileUser }
+        { friendId, userId: ProfileUser },
+        { withCredentials: true }
       );
       console.log(res);
 
@@ -119,7 +120,8 @@ const Home = () => {
     try {
       const res = await axios.post(
         `${process.env.BASE_URL}/api/friends/accept-friend`,
-        { friendId, userId: ProfileUser }
+        { friendId, userId: ProfileUser },
+        { withCredentials: true }
       );
       console.log(res);
       toast.success("Friend Request Accepted ");
@@ -136,7 +138,8 @@ const Home = () => {
     try {
       const res = await axios.post(
         `${process.env.BASE_URL}/api/friends/unfriend`,
-        { friendId, userId: ProfileUser }
+        { friendId, userId: ProfileUser },
+        { withCredentials: true }
       );
       console.log(res);
       toast.success("Succesfully Unfriended");
