@@ -29,7 +29,6 @@ const Home = () => {
   const [activeTab, setActiveTab] = useState("friends");
   const navigate = useNavigate();
   console.log(mainUser);
-  // Fetch mutual friends logic
 
   useEffect(() => {
     const searchUsers = () => {
@@ -44,7 +43,7 @@ const Home = () => {
       }
     };
     searchUsers();
-  }, [searchItem, users, friendList, mainUser, friendRequests]);
+  });
 
   useEffect(() => {
     const fetchData = async () => {
@@ -74,6 +73,7 @@ const Home = () => {
         setFriends(Array.from(friendIds));
       }
     };
+
     fetchData();
     const getMutualFriends = () => {
       const mutualFriends = [];
@@ -93,7 +93,7 @@ const Home = () => {
     };
 
     getMutualFriends();
-  }, [activeTab, friendList, friends, users, mainUser]);
+  });
 
   async function handleAddFriend(friendId) {
     try {
